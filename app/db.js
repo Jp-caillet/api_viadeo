@@ -1,17 +1,14 @@
 const mongoose = require('mongoose')
 
-mongoose.connect('mongodb://localhost:27017/Etherpe', {
-    useNewUrlParser: true
-})
 
-this.db = mongoose.connection
-this.db.on('error', () => {
-    res.status(500).json({
-        'code': 500,
-        'message': 'Internal Server Error'
+mongoose.connect('mongodb://localhost:27017/bigData', {
+        useUnifiedTopology: true,
+        useNewUrlParser: true,
     })
-
-    console.error(`[ERROR] user/create getModel() -> Connetion fail`)
-})
+    .then(() => console.log('DB Connected!'))
+    .catch(err => {
+        console.log(err)
+    });
+this.db = mongoose.connection
 
 module.exports = this.db

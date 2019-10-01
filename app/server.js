@@ -19,6 +19,7 @@ module.exports = class Server {
         this.app = express()
         this.server = server.createServer(this.app)
         this.run()
+        this.routes()
     }
 
     /**
@@ -39,7 +40,9 @@ module.exports = class Server {
     routes() {
 
         new routes.user.UserCreate(this.app)
-            // If route not exist
+        new routes.name.NamesShows(this.app)
+
+        // If route not exist
         this.app.use((req, res) => {
             res.status(404).json({
                 'code': 404,
