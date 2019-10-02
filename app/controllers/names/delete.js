@@ -2,9 +2,14 @@
 const mongoose = require('mongoose')
 const validator = require('node-validator')
 const db = require('../../db.js')
+const _ = require('node-validator')
+
+
+
 
 // Core
 
+const check = _.isObject().withRequired('name', _.isString())
 
 module.exports = class Show {
     constructor(app) {
@@ -16,11 +21,11 @@ module.exports = class Show {
      * Middleware
      */
     middleware() {
-        this.app.get('/name/shows', async(req, res) => {
+        this.app.post('/name/delete', validator.express(check), async(req, res) => {
             try {
                 // Save
 
-                const result = await db.collection('names').find({}).toArray()
+                const result = await db.collection('names').remove({ prenom :req.body.name })
                 res.status(200).json(result)
 
             } catch (e) {

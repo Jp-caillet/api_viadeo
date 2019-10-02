@@ -19,7 +19,6 @@ module.exports = class Server {
         this.app = express()
         this.server = server.createServer(this.app)
         this.run()
-        this.routes()
     }
 
     /**
@@ -41,6 +40,10 @@ module.exports = class Server {
 
         new routes.user.UserCreate(this.app)
         new routes.name.NamesShows(this.app)
+        new routes.name.NamesShowOne(this.app)
+        new routes.name.NamesDeletes(this.app)
+        new routes.url.UrlCreate(this.app)
+
 
         // If route not exist
         this.app.use((req, res) => {
@@ -63,6 +66,9 @@ module.exports = class Server {
      * Run
      */
     run() {
+        this.security()
+        this.middleware()
+        this.routes()
         this.server.listen(4000)
         console.log('connected port 4000')
     } catch (e) {

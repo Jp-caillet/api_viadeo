@@ -1,5 +1,8 @@
-const NamesShows = require('./user/create.js')
-const UserCreate = require('./names/shows.js')
+const NamesShows = require('./names/shows.js')
+const NamesShowOne = require('./names/showFirst.js')
+const NamesDeletes = require('./names/delete.js')
+const UserCreate = require('./user/create.js')
+const UrlCreate = require('./urls/create.js')
 
 
 module.exports = {
@@ -7,7 +10,12 @@ module.exports = {
         UserCreate
     },
     name: {
-        NamesShows
+        NamesShows,
+        NamesDeletes,
+        NamesShowOne
+    },
+    url: {
+        UrlCreate
     }
 
 }

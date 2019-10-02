@@ -16,12 +16,12 @@ module.exports = class Show {
      * Middleware
      */
     middleware() {
-        this.app.get('/name/shows', async(req, res) => {
+        this.app.get('/name/showOne', async(req, res) => {
             try {
                 // Save
 
                 const result = await db.collection('names').find({}).toArray()
-                res.status(200).json(result)
+                res.status(200).json(result[0])
 
             } catch (e) {
                 console.error(`[ERROR] user/searchByEmail -> ${e}`)
