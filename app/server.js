@@ -43,7 +43,9 @@ module.exports = class Server {
         new routes.name.NamesShowOne(this.app)
         new routes.name.NamesDeletes(this.app)
         new routes.url.UrlCreate(this.app)
-
+        new routes.url.UrlShows(this.app)
+        new routes.url.UrlUpdateExploit(this.app)
+        new routes.url.UrlShowOne(this.app)
 
         // If route not exist
         this.app.use((req, res) => {

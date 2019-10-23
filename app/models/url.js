@@ -5,8 +5,10 @@ module.exports = new Schema({
         type: String,
         unique: true,
         required: true
-    }
+    },
+    exploit: String,
+    crawler: String
 }, {
-    collection: 'urls',
+    collection: 'tests',
     versionKey: false
 })

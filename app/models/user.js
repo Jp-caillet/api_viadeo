@@ -13,7 +13,7 @@ module.exports = new Schema({
         unique: true
     },
     description: String,
-    parcours: String,
+    parcours: Array,
     competence: Array,
     langues: Array,
     interet: Array,

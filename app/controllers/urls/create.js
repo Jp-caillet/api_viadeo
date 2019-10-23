@@ -28,6 +28,8 @@ module.exports = class Create {
         const model = new Url
 
         model.url = payload.url
+        model.exploit = "0"
+        model.crawler = "0"
 
         return model
     }
@@ -36,10 +38,9 @@ module.exports = class Create {
      * Middleware
      */
     middleware() {
-        this.app.post('/url/create', (req, res) => {
+        this.app.post('/url/create', _.express(check), async(req, res) => {
             try {
-                console.log(req.body)
-                    // Save
+                // Save
                 this.getModel(req.body).save((err, result) => {
                     if (err) {
                         res.status(401).json({

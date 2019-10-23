@@ -3,6 +3,10 @@ const NamesShowOne = require('./names/showFirst.js')
 const NamesDeletes = require('./names/delete.js')
 const UserCreate = require('./user/create.js')
 const UrlCreate = require('./urls/create.js')
+const UrlShows = require('./urls/shows.js')
+const UrlShowOne = require('./urls/showFirst.js')
+const UrlUpdateExploit = require('./urls/updateExploit.js')
+
 
 
 module.exports = {
@@ -15,7 +19,10 @@ module.exports = {
         NamesShowOne
     },
     url: {
-        UrlCreate
+        UrlCreate,
+        UrlShows,
+        UrlUpdateExploit,
+        UrlShowOne
     }
 
 }
