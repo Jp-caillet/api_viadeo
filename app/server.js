@@ -46,6 +46,9 @@ module.exports = class Server {
         new routes.url.UrlShows(this.app)
         new routes.url.UrlUpdateExploit(this.app)
         new routes.url.UrlShowOne(this.app)
+        new routes.url.UrlShowOneCrawl(this.app)
+        new routes.url.UrlUpdateCrawl(this.app)
+
 
         // If route not exist
         this.app.use((req, res) => {

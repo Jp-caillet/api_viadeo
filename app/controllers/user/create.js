@@ -8,19 +8,26 @@ const myPlaintextPassword = 's0/\/\P4$$w0rD'
 const someOtherPlaintextPassword = 'not_bacon'
 const db = require('../../db.js')
 const mongoose = require('mongoose')
+const emailExistence = require('email-existence')
 
 // Core
 const check = validator.isObject()
     .withRequired('url', validator.isString())
     .withOptional('nom', validator.isString())
     .withOptional('prenom', validator.isString())
-    .withOptional('Photo', validator.isString())
+    .withOptional('actualPoste', validator.isString())
+    .withOptional('resume', validator.isString())
+    .withOptional('photo', validator.isString())
+    .withOptional('nbFriend', validator.isNumber())
+    .withOptional('localisation', validator.isString())
     .withOptional('description', validator.isString())
     .withOptional('parcours', validator.isArray())
     .withOptional('competence', validator.isArray())
     .withOptional('langues', validator.isArray())
     .withOptional('interet', validator.isArray())
-    .withOptional('relation', validator.isArray())
+    .withOptional('email', validator.isObject()
+        .withOptional('nomP', validator.isString())
+        .withOptional('pNom', validator.isString()))
 
 module.exports = class Create {
     constructor(app) {
@@ -38,17 +45,27 @@ module.exports = class Create {
         const model = new User
 
         model.url = payload.url
-        model.nom = payload.nom
-        model.Photo = payload.Photo
         model.prenom = payload.prenom
+        model.actualPoste = payload.actualPoste
+        model.nom = payload.nom
+        model.resume = payload.resume
+        model.photo = payload.photo
+        model.nbFriend = payload.nbFriend
+        model.localisation = payload.localisation
         model.description = payload.description
-        model.parcours = payload.parcours
+
+        for (let i = 0; i <= payload.parcours.length - 1; i++) {
+            model.parcours.push(payload.parcours[i])
+        }
+
         model.competence = payload.competence
         model.langues = payload.langues
         model.interet = payload.interet
-        model.relation = payload.relation
+        model.email.nomP = payload.email.nomP
+        model.email.pNom = payload.email.pNom
 
         return model
+
     }
 
     /**
@@ -58,13 +75,14 @@ module.exports = class Create {
         this.app.post('/user/create', validator.express(check), (req, res) => {
             try {
                 // Save
+
                 this.getModel(res, req.body).save((err, result) => {
                     if (err) {
                         res.status(401).json({
-                            'code': 401,
-                            'message': "user already exist"
-                        })
-                        console.error(`[ERROR] user/create middleware() -> ${err}`)
+                                'code': 401,
+                                'message': "user already exist"
+                            })
+                            //console.error(`[ERROR] user/create middleware() -> ${err}`)
                     }
 
                     res.status(200).json(result)

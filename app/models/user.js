@@ -3,21 +3,32 @@ const Schema = require('mongoose').Schema
 module.exports = new Schema({
     nom: String,
     prenom: String,
+    actualPoste: String,
     url: {
         type: String,
         unique: true,
         required: true
     },
-    Photo: {
-        type: String,
-        unique: true
+    photo: {
+        type: String
     },
+    nbFriend: Number,
+    localisation: String,
     description: String,
-    parcours: Array,
-    competence: Array,
-    langues: Array,
-    interet: Array,
-    relation: Array
+    resume: String,
+    parcours: [{
+        posteName: String,
+        entreprise: String,
+        duree: String
+
+    }],
+    competence: [],
+    langues: [],
+    interet: [],
+    email: {
+        nomP: String,
+        pNom: String
+    }
 }, {
     collection: 'users',
     versionKey: false
